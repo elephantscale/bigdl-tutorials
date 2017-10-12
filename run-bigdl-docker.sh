@@ -16,6 +16,7 @@ if [ -z "$1" ] ; then
     echo "Missing Docker image id.  exiting"
     exit -1
 fi
+
 image_id="$1"
 cmd="$2"
 name="bigdl"
@@ -31,4 +32,4 @@ docker run -it  --name "$name" \
     -p 8888:8888 \
     -v"$mydir:/work" \
     "$image_id" \
-    "$cmd"
+    ${cmd}
