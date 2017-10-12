@@ -6,10 +6,10 @@
 $   cd  bigdl-tutorials/docker
 
 # to use default 'Dockerfile'
-$   docker build .
+$   docker build -t bigdl-spark-2.2  .
 
 #   to do a different build file
-$   docker build .  -f  Dockerfile2
+$   docker build  -f  Dockerfile-spark-2.1  -t bigdl-spark-2.1   .
 ```
 
 To see built images
