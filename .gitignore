@@ -1,1 +1,6 @@
 .ipynb_checkpoints
+derby.log
+metastore_db
+*.zip
+*.out
+.DS_Store
