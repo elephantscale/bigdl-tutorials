@@ -2,10 +2,21 @@
 
 ## Building
 
-```
+```bash
 $   cd  bigdl-tutorials/docker
+
+# to use default 'Dockerfile'
 $   docker build .
+
+#   to do a different build file
+$   docker build .  -f  Dockerfile2
+```
+
+To see built images
+
+```bash
 $   docker images
+$   docker image inspect  <IMAGE_ID>
 ```
 
 ## Running it
