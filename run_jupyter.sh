@@ -21,7 +21,6 @@ if [ -z "${CONDA_DIR}" ]; then
 fi
 
 
-
 #setup pathes
 export PYSPARK_DRIVER_PYTHON=${CONDA_DIR}/bin/jupyter
 # this starts the notebook without a security token
