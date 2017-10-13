@@ -22,7 +22,8 @@ fi
 
 
 
-#setup pathes
+#setup paths
+export PYSPARK_PYTHON=${CONDA_DIR}/bin/python3
 export PYSPARK_DRIVER_PYTHON=${CONDA_DIR}/bin/jupyter
 # this starts the notebook without a security token
 #export PYSPARK_DRIVER_PYTHON_OPTS="notebook --notebook-dir=./ --ip=* --no-browser --NotebookApp.token=''"

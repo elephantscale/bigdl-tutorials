@@ -12,16 +12,13 @@ ARG SBT_VERSION=1.0.2
 ARG INSTALL_DIR=/usr/local
 ## --- end CONFIG
 
-## --- other variables
-## --- end
-
 USER root
 
-# update
+## apt update
 RUN apt-get update -yq && \
     apt-get -yq dist-upgrade
 
-# basic utils
+## basic utils + jdk
 RUN apt-get install -yq  --no-install-recommends \
     atop \
     curl \
@@ -32,7 +29,7 @@ RUN apt-get install -yq  --no-install-recommends \
     wget \
     zip
 
-# install maven
+## install maven
 RUN curl -fsL  http://apache.cs.utah.edu/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz | tar xfz - -C ${INSTALL_DIR}
 
 RUN cd ${INSTALL_DIR} && rm -f maven && ln -s apache-maven-${MAVEN_VERSION}  maven
@@ -41,11 +38,10 @@ ENV MAVEN_HOME ${INSTALL_DIR}/maven
 ENV PATH=$MAVEN_HOME/bin:$PATH
 
 
-# install scala & sbt
-# Scala expects this file
+## Scala expects this file
 RUN touch /usr/lib/jvm/java-8-openjdk-amd64/release
 
-# Install Scala
+## Install Scala
 RUN \
   curl -fsL https://downloads.typesafe.com/scala/${SCALA_VERSION}/scala-${SCALA_VERSION}.tgz | tar xfz - -C ${INSTALL_DIR}
 
@@ -53,9 +49,9 @@ RUN cd ${INSTALL_DIR} && rm -f scala && ln -s scala-${SCALA_VERSION}  scala
 
 ENV PATH=${INSTALL_DIR}/scala/bin:$PATH
 
-# Install sbt
+## Install sbt
 RUN \
-  curl -L -o sbt-${SBT_VERSION}.deb https://dl.bintray.com/sbt/debian/sbt-${SBT_VERSION}.deb && \
+  curl -L -o sbt-${SBT_VERSION}.deb "https://dl.bintray.com/sbt/debian/sbt-${SBT_VERSION}.deb" && \
   dpkg -i sbt-${SBT_VERSION}.deb && \
   rm sbt-${SBT_VERSION}.deb && \
   apt-get update && \
@@ -67,7 +63,7 @@ RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 ## ----- install BigDL
-# This is a pre-built BigDL binary
+## This is a pre-built BigDL binary
 RUN \
     cd ${INSTALL_DIR} && \
     wget --quiet "https://s3.amazonaws.com/elephantscale-public/BigDL/BigDL.zip"  && \
@@ -78,7 +74,7 @@ ENV BIGDL_HOME  ${INSTALL_DIR}/BigDL
 
 ## ---- done with installs ----
 
-# disable sudo password
+## disable sudo password
 RUN echo "${NB_USER} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 ENV PATH=${INSTALL_DIR}/spark/bin:$PATH
@@ -93,6 +89,12 @@ RUN mkdir /work
 
 ### now as a regular user
 USER $NB_USER
+
+## update conda
+# RUN conda update --all
+
+## install NLTK
+RUN  conda  install -y  nltk
 
 # working directory
 ENV WORKING_DIR ${HOME}/work
