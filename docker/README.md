@@ -3,20 +3,25 @@
 ## Building
 
 ```bash
-$   cd  bigdl-tutorials/docker
+    $   cd  bigdl-tutorials/docker
 
-# to use default 'Dockerfile'
-$   docker build -t bigdl-spark-2.2  .
+    # to use default 'Dockerfile'
+    $   docker build -t bigdl-spark-2.2  .
 
-#   to do a different build file
-$   docker build  -f  Dockerfile-spark-2.1  -t bigdl-spark-2.1   .
+    #   to do a different build file
+    $   docker build  -f  Dockerfile-spark-2.1  -t bigdl-spark-2.1   .
+```
+
+To force a build provide  `--no-cache ` option
+```bash
+    $   docker build --no-cache  -t bigdl-spark-2.2  .
 ```
 
 To see built images
 
 ```bash
-$   docker images
-$   docker image inspect  <IMAGE_ID>
+    $   docker images
+    $   docker image inspect  <IMAGE_ID>
 ```
 
 ## Running it
