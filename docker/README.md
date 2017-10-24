@@ -9,7 +9,7 @@
     $   docker build -t bigdl-spark-2.2  .
 
     #   to do a different build file
-    $   docker build  -f  Dockerfile-spark-2.1  -t bigdl-spark-2.1   .
+    $   docker build  -f  Dockerfile-v2  -t bigdl-spark-2.1   .
 ```
 
 To force a build provide  `--no-cache ` option

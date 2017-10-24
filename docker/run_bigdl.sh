@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## Usage
-#   BIGDL_HOME=~/apps/BigDL   SPARK_HOME=~/apps/spark  CONDA_DIR=~/anaconda   ./run_jupyter.sh
+#   BIGDL_HOME=~/apps/BigDL   SPARK_HOME=~/apps/spark    ./run_bigdl.sh
 
 
 # Check environment variables
@@ -15,16 +15,14 @@ if [ -z "${SPARK_HOME}" ]; then
     exit 1
 fi
 
-if [ -z "${CONDA_DIR}" ]; then
-    echo "Please set CONDA_DIR environment variable"
-    exit 1
-fi
-
+# activate py35 environment
+source activate py35
+conda info -e
 
 
 #setup paths
-export PYSPARK_PYTHON=${CONDA_DIR}/bin/python3
-export PYSPARK_DRIVER_PYTHON=${CONDA_DIR}/bin/jupyter
+export PYSPARK_PYTHON=$(which python3)
+export PYSPARK_DRIVER_PYTHON=$(which jupyter)
 # this starts the notebook without a security token
 #export PYSPARK_DRIVER_PYTHON_OPTS="notebook --notebook-dir=./ --ip=* --no-browser --NotebookApp.token=''"
 export PYSPARK_DRIVER_PYTHON_OPTS="notebook --notebook-dir=./ --ip=* --no-browser"
