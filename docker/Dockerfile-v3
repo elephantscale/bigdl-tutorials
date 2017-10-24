@@ -114,13 +114,13 @@ RUN conda create -y -n py27 python=2.7 numpy scipy pandas scikit-learn matplotli
 RUN conda info -e
 
 ## source python 3.5
-RUN echo "source activate py35 >> ~/.bashrc"
+RUN echo "source activate py35" >> ~/.bashrc
 
 # working directory
 ENV WORKING_DIR ${HOME}/work
 RUN rm -rf ${WORKING_DIR} && ln -s /work  ${WORKING_DIR}
 
-COPY run_bigdl.sh  $HOME/
+COPY run-bigdl.sh  $HOME/
 
 ## finally switch back to jovyan to avoid accidental container runs as root
 USER $NB_USER

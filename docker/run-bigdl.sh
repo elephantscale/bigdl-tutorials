@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## Usage
-#   BIGDL_HOME=~/apps/BigDL   SPARK_HOME=~/apps/spark    ./run_bigdl.sh
+#   BIGDL_HOME=~/apps/BigDL   SPARK_HOME=~/apps/spark    ./run-bigdl.sh
 
 
 # Check environment variables
