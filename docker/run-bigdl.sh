@@ -21,8 +21,10 @@ conda info -e
 
 
 #setup paths
-export PYSPARK_PYTHON=$(which python3)
+export PYSPARK_PYTHON=$(which python)
 export PYSPARK_DRIVER_PYTHON=$(which jupyter)
+echo "### PYSPARK_PYTHON=$PYSPARK_PYTHON"
+echo "### PYSPARK_DRIVER_PYTHON=$PYSPARK_DRIVER_PYTHON"
 # this starts the notebook without a security token
 #export PYSPARK_DRIVER_PYTHON_OPTS="notebook --notebook-dir=./ --ip=* --no-browser --NotebookApp.token=''"
 export PYSPARK_DRIVER_PYTHON_OPTS="notebook --notebook-dir=./ --ip=* --no-browser"

@@ -80,20 +80,14 @@ RUN \
 
 ENV BIGDL_HOME  ${INSTALL_DIR}/BigDL
 
-## ---- done with installs ----
-
 ## disable sudo password
 RUN echo "${NB_USER} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 ENV PATH=${INSTALL_DIR}/spark/bin:$PATH
 
-RUN mv /usr/local/bin/start-notebook.sh   /usr/local/bin/start-notebook-old.sh
-COPY  start-notebook.sh  /usr/local/bin/
-RUN chmod +x /usr/local/bin/start-notebook.sh
-
+# this is where volumes will be mounted
 RUN mkdir /work
 
-## ---- done with setup as root ----
 
 ### now as a regular user
 USER $NB_USER
@@ -109,7 +103,6 @@ RUN conda create -y -n py35 python=3.5 numpy scipy pandas scikit-learn matplotli
 ## python 2.7 env
 RUN conda create -y -n py27 python=2.7 numpy scipy pandas scikit-learn matplotlib seaborn jupyter wordcloud nltk
 
-## activate 35
 # list envs
 RUN conda info -e
 
@@ -120,7 +113,15 @@ RUN echo "source activate py35" >> ~/.bashrc
 ENV WORKING_DIR ${HOME}/work
 RUN rm -rf ${WORKING_DIR} && ln -s /work  ${WORKING_DIR}
 
+## --- copy files last, so not to bust the cache ---
+
 COPY run-bigdl.sh  $HOME/
+
+USER root
+RUN mv /usr/local/bin/start-notebook.sh   /usr/local/bin/start-notebook-old.sh
+COPY  start-notebook.sh  /usr/local/bin/
+RUN chmod +x /usr/local/bin/start-notebook.sh
+
 
 ## finally switch back to jovyan to avoid accidental container runs as root
 USER $NB_USER

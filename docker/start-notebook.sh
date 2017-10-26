@@ -1,10 +1,9 @@
 #!/bin/bash
 set -e
 
-
 # activate py35 environment
-# source activate py35
-# conda info -e
+#source activate py35
+#conda info -e
 
 /usr/local/bin/start.sh  ~/run-bigdl.sh
 

@@ -6,10 +6,12 @@
     $   cd  bigdl-tutorials/docker
 
     # to use default 'Dockerfile'
-    $   docker build -t bigdl-spark-2.2  .
+    # do not forget this DOT (.) at the end
+    $   docker build -t bigdl/bigdl  .
 
     #   to do a different build file
-    $   docker build  -f  Dockerfile-v2  -t bigdl-spark-2.1   .
+    # do not forget this DOT (.) at the end
+    $   docker build  -f  Dockerfile-v3  -t bigdl/bigdl   .
 ```
 
 To force a build provide  `--no-cache ` option
