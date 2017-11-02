@@ -16,7 +16,9 @@ if [ -z "${SPARK_HOME}" ]; then
 fi
 
 # activate py35 environment
-source activate py35
+#source activate py35
+# activate py27 environment
+source activate py27
 conda info -e
 
 
