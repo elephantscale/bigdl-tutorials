@@ -11,6 +11,12 @@ ARG SCALA_VERSION=2.11.8
 ARG SPARK_VERSION=2.2.0
 ARG SBT_VERSION=1.0.2
 ARG INSTALL_DIR=/usr/local
+ENV BIGDL_HOME  ${INSTALL_DIR}/BigDL
+
+#ARG BIGDL_URL=https://s3.amazonaws.com/elephantscale-public/BigDL/BigDL.zip
+## Download BigDL from release page
+## https://bigdl-project.github.io/0.3.0/#release-download/
+ARG BIGDL_URL=https://repo1.maven.org/maven2/com/intel/analytics/bigdl/dist-spark-${SPARK_VERSION}-scala-2.11.8-linux64/0.3.0/dist-spark-${SPARK_VERSION}-scala-2.11.8-linux64-0.3.0-dist.zip
 ## --- end CONFIG
 
 USER root
@@ -71,14 +77,12 @@ RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 ## ----- install BigDL
-## This is a pre-built BigDL binary
 RUN \
-    cd ${INSTALL_DIR} && \
-    wget --quiet "https://s3.amazonaws.com/elephantscale-public/BigDL/BigDL.zip"  && \
-    unzip BigDL.zip && \
-    rm -f BigDL.zip
-
-ENV BIGDL_HOME  ${INSTALL_DIR}/BigDL
+    mkdir -p ${BIGDL_HOME} && \
+    cd ${BIGDL_HOME} && \
+    wget --quiet "${BIGDL_URL}"  && \
+    unzip *.zip && \
+    rm -f *.zip
 
 ## disable sudo password
 RUN echo "${NB_USER} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
@@ -107,7 +111,10 @@ RUN conda create -y -n py27 python=2.7 numpy scipy pandas scikit-learn matplotli
 RUN conda info -e
 
 ## source python 3.5
-RUN echo "source activate py35" >> ~/.bashrc
+## RUN echo "source activate py35" >> ~/.bashrc
+
+## source python 2.7
+## RUN echo "source activate py27" >> ~/.bashrc
 
 # working directory
 ENV WORKING_DIR ${HOME}/work
