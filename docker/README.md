@@ -11,6 +11,9 @@
 
     #   to do a different build file
     # do not forget this DOT (.) at the end
+    $   docker build  -f  Dockerfile-v3   .
+
+    # to add a tag
     $   docker build  -f  Dockerfile-v3  -t bigdl/bigdl   .
 ```
 
@@ -58,3 +61,21 @@ In Docker container you can run Jupyter as follows
 ```
 
 Go to http://localhost:8888  in browser
+
+
+## Pushing to Dockerhub
+
+```bash
+
+    ## login
+    $  docker login
+    ## enter username, password
+
+    ## tag the image
+    $   docker tag IMAGE_ID  elephantscale/bigdl-sandbox:latest
+    $   docker images
+
+    ## Pushing
+    $   docker  push  elephantscale/bigdl-sandbox:latest
+
+```

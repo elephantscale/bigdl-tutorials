@@ -102,10 +102,10 @@ USER $NB_USER
 RUN  conda  install -y  nltk
 
 ## python 3.5 env
-RUN conda create -y -n py35 python=3.5 numpy scipy pandas scikit-learn matplotlib seaborn jupyter wordcloud nltk
+RUN conda create -y -n py35 python=3.5 numpy scipy pandas scikit-learn matplotlib seaborn jupyter nltk tensorflow  tensorflow-tensorboard
 
 ## python 2.7 env
-RUN conda create -y -n py27 python=2.7 numpy scipy pandas scikit-learn matplotlib seaborn jupyter wordcloud nltk
+RUN conda create -y -n py27 python=2.7 numpy scipy pandas scikit-learn matplotlib seaborn jupyter nltk tensorflow  tensorflow-tensorboard
 
 # list envs
 RUN conda info -e
