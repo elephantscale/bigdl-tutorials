@@ -30,6 +30,7 @@ mydir=$(cd -P -- "$(dirname -- "$this")" && pwd -P)
 
 docker run -it  --name "$name" \
     -p 8888:8888 \
+    -p 6006:6006 \
     -v"$mydir:/work" \
     "$image_id" \
     ${cmd}
