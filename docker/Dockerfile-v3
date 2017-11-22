@@ -102,19 +102,30 @@ USER $NB_USER
 RUN  conda  install -y  nltk
 
 ## python 3.5 env
-RUN conda create -y -n py35 python=3.5 numpy scipy pandas scikit-learn matplotlib seaborn jupyter nltk tensorflow  tensorflow-tensorboard
+RUN conda create -y -n py35 python=3.5 numpy scipy pandas scikit-learn matplotlib seaborn jupyter nltk tensorflow
 
 ## python 2.7 env
-RUN conda create -y -n py27 python=2.7 numpy scipy pandas scikit-learn matplotlib seaborn jupyter nltk tensorflow  tensorflow-tensorboard
+RUN conda create -y -n py27 python=2.7 numpy scipy pandas scikit-learn matplotlib seaborn jupyter nltk tensorflow
 
 # list envs
 RUN conda info -e
 
+## install tensorboard with pip  for py27
+RUN /bin/bash -c "source activate py27 && \
+    pip install tensorboard && \
+    source deactivate"
+
+## install tensorboard with pip for py35
+RUN /bin/bash -c "source activate py35 && \
+    pip install  tensorboard && \
+    source deactivate"
+
 ## source python 3.5
-## RUN echo "source activate py35" >> ~/.bashrc
+RUN echo "source activate py35" >> ~/.bashrc
 
 ## source python 2.7
-## RUN echo "source activate py27" >> ~/.bashrc
+## This will be the default python env
+RUN echo "source activate py27" >> ~/.bashrc
 
 # working directory
 ENV WORKING_DIR ${HOME}/work
