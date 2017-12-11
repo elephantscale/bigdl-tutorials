@@ -7,7 +7,7 @@
 
     # to use default 'Dockerfile'
     # do not forget this DOT (.) at the end
-    $   docker build -t bigdl/bigdl  .
+    $   docker build  .
 
     #   to do a different build file
     # do not forget this DOT (.) at the end
@@ -19,7 +19,7 @@
 
 To force a build provide  `--no-cache ` option
 ```bash
-    $   docker build --no-cache  -t bigdl-spark-2.2  .
+    $   docker build --no-cache   .
 ```
 
 To see built images
