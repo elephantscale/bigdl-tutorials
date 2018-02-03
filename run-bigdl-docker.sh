@@ -19,16 +19,12 @@ fi
 
 image_id="$1"
 cmd="$2"
-name="bigdl"
-
-## remove any previously running containers
-docker rm -f "$name"
 
 # mount the current directory at /work
 this="${BASH_SOURCE-$0}"
 mydir=$(cd -P -- "$(dirname -- "$this")" && pwd -P)
 
-docker run -it  --name "$name" \
+docker run -it   \
     -p 8888:8888 \
     -p 6006:6006 \
     -v"$mydir:/work" \
